@@ -3,17 +3,26 @@ const url = 'https://jsonplaceholder.typicode.com/users';
 const xhr = new XMLHttpRequest();
 
 xhr.open('GET', url);
-xhr.responseType = 'text'
+xhr.responseType = 'json'
 
 
 xhr.onload = function() {
     const list = document.getElementById('list');
-    const li = document.createElement('li');
 
-    list.append(li)
-    li.innerHTML = xhr.response
+    xhr.response.forEach(e => {
+        list.innerHTML += ` 
+            <div class="menu"> 
+                <p class="text_one">ID: ${e.id}</p> 
+                <p class="text">Имя: ${e.name}</p> 
+                <p class="text">Логин: ${e.username}</p> 
+                <p class="text">Почта: ${e.email}</p> 
+                <p class="text">Телефон: ${e.phone}</p> 
+                <p class="text">Сайт: ${e.website}</p> 
+            </div> 
+        `
+    })
 
-    console.log(JSON.parse(xhr.response))
+    console.log(xhr.response)
 };
 
 
